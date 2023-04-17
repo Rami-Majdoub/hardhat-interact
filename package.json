@@ -1,9 +1,9 @@
 {
-  "name": "hardhat-ts-plugin-boilerplate",
+  "name": "@rami-majdoub/hardhat-interact",
   "version": "0.0.1",
-  "description": "Hardhat TypeScript plugin boilerplate",
-  "repository": "github:nomiclabs/hardhat-ts-plugin-boilerplate",
-  "author": "Nomic Labs LLC",
+  "description": "Hardhat TypeScript plugin to interact with smart contracts",
+  "repository": "github:rami-majdoub/hardhat-interact",
+  "author": "Rami Majdoub",
   "license": "MIT",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
@@ -11,7 +11,8 @@
     "ethereum",
     "smart-contracts",
     "hardhat",
-    "hardhat-plugin"
+    "hardhat-plugin",
+    "hardhat-interact"
   ],
   "scripts": {
     "lint:fix": "prettier --write 'src/**/*.{js,ts}' 'test/**/*.{js,ts}' && tslint --fix --config tslint.json --project tsconfig.json",
@@ -44,5 +45,12 @@
   },
   "peerDependencies": {
     "hardhat": "^2.0.0"
+  },
+  "dependencies": {
+    "ethers": "^5.7.2",
+    "@nomiclabs/hardhat-ethers": "^2.2.3",
+    "@types/prompts": "^2.4.4",
+    "chalk": "^4.1.2",
+    "prompts": "^2.4.2"
   }
 }
