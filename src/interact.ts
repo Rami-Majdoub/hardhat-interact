@@ -1,8 +1,10 @@
 import chalk from "chalk";
-import { Contract } from "ethers";
+import { Contract, Transaction, ethers } from "ethers";
 import { task, types } from "hardhat/config";
 import { Artifacts } from "hardhat/types";
 import prompts, { PromptObject } from "prompts";
+
+import { Block, BlockTag, Filter, FilterByBlockHash, Listener, Log, Provider, TransactionReceipt, TransactionRequest, TransactionResponse } from "@ethersproject/abstract-provider";
 
 /**
  * Ask the user to select the contract name
@@ -96,15 +98,6 @@ const inputFunctionArgs = async (args: any[]) => {
 
   const solidityTypesToPromptTypes = {
     bool: boolConfig,
-    uint8: numberConfig,
-    uint16: numberConfig,
-    uint32: numberConfig,
-    uint40: numberConfig,
-    uint48: numberConfig,
-    // all other uints & ints
-    uint240: numberConfig,
-    uint248: numberConfig,
-    uint256: numberConfig,
     _default: textConfig,
   };
 
@@ -240,8 +233,9 @@ task("interact", "Calls a function of a contract")
 
           if (txRequireConfirmation) {
             console.log(`Waiting for tx confirmation: ${tx.hash}`);
-            await tx.wait();
+            const txResponse: TransactionReceipt = await tx.wait();
             console.log(chalk.green("Transaction confirmed"));
+            console.log("⛽ Gas used: " + txResponse.gasUsed)
           } else {
             console.log(`Returned: ${tx[0]}`);
           }
